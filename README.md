@@ -2,7 +2,7 @@
     <a href="https://github.com/portalium" target="_blank">
         <img src="./portalium_logo.png" height="100px">
     </a>
-    <h1 align="center">Portalium _____</h1>
+    <h1 align="center">ulkuiremdeniz-todo</h1>
     <br>
 </p>
 
