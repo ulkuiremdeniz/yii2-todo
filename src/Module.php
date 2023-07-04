@@ -7,7 +7,7 @@ use ulkuiremdeniz\todo\components\TriggerActions;
 
 class Module extends \portalium\base\Module
 {
-    public static $tablePrefix = 'todo';
+    public static $tablePrefix = 'todo_';
     
     public static $name = 'todo';
 
@@ -25,7 +25,7 @@ class Module extends \portalium\base\Module
     public static function moduleInit()
     {
         self::registerTranslation('todo','@ulkuiremdeniz/todo/messages',[
-            'todo' => '{{package}}.php',
+            'todo' => 'todo.php',
         ]);
     }
 
@@ -34,6 +34,13 @@ class Module extends \portalium\base\Module
         return parent::coreT('todo', $message, $params);
     }
 
+
+
+
+
+
+
+
     /* 
         public function registerEvents()
         {
@@ -41,3 +48,5 @@ class Module extends \portalium\base\Module
         } 
     */
 }
+
+
