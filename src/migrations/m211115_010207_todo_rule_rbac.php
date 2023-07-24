@@ -2,6 +2,7 @@
 
 use yii\db\Migration;
 use portalium\todo\rbac\OwnRule;
+
 class m211115_010207_todo_rule_rbac extends Migration
 {
 
@@ -55,6 +56,45 @@ class m211115_010207_todo_rule_rbac extends Migration
         $todoWebDefaultDelete = $auth->getPermission('todoWebDefaultDelete');
         $auth->addChild($todoWebDefaultDeleteOwn, $todoWebDefaultDelete);
 
+        $todoApiDefaultViewOwn = $auth->createPermission('todoApiDefaultViewOwn');
+        $todoApiDefaultViewOwn->description = 'Todo Api DefaultViewOwn';
+        $todoApiDefaultViewOwn->ruleName = $rule->name;
+        $auth->add($todoApiDefaultViewOwn);
+        $auth->addChild($admin, $todoApiDefaultViewOwn);
+        $todoApiDefaultView = $auth->getPermission('todoApiDefaultView');
+        $auth->addChild($todoApiDefaultViewOwn, $todoApiDefaultView);
+
+        $todoApiDefaultCreateOwn = $auth->createPermission('todoApiDefaultCreateOwn');
+        $todoApiDefaultCreateOwn->description = 'Todo Api DefaultCreateOwn';
+        $todoApiDefaultCreateOwn->ruleName = $rule->name;
+        $auth->add($todoApiDefaultCreateOwn);
+        $auth->addChild($admin, $todoApiDefaultCreateOwn);
+        $todoApiDefaultCreate = $auth->getPermission('todoApiDefaultCreate');
+        $auth->addChild($todoApiDefaultCreateOwn, $todoApiDefaultCreate);
+
+        $todoApiDefaultUpdateOwn = $auth->createPermission('todoApiDefaultUpdateOwn');
+        $todoApiDefaultUpdateOwn->description = 'Todo Api DefaultUpdateOwn';
+        $todoApiDefaultUpdateOwn->ruleName = $rule->name;
+        $auth->add($todoApiDefaultUpdateOwn);
+        $auth->addChild($admin, $todoApiDefaultUpdateOwn);
+        $todoApiDefaultUpdate = $auth->getPermission('todoApiDefaultUpdate');
+        $auth->addChild($todoApiDefaultUpdateOwn, $todoApiDefaultUpdate);
+
+        $todoApiDefaultDeleteOwn = $auth->createPermission('todoApiDefaultDeleteOwn');
+        $todoApiDefaultDeleteOwn->description = 'Todo Api DefaultDeleteOwn';
+        $todoApiDefaultDeleteOwn->ruleName = $rule->name;
+        $auth->add($todoApiDefaultDeleteOwn);
+        $auth->addChild($admin, $todoApiDefaultDeleteOwn);
+        $todoApiDefaultDelete = $auth->getPermission('todoApiDefaultDelete');
+        $auth->addChild($todoApiDefaultDeleteOwn, $todoApiDefaultDelete);
+
+
+        $todoApiDefaultIndexOwn = $auth->createPermission('todoApiDefaultIndexOwn');
+        $todoApiDefaultIndexOwn->description = 'Todo Api DefaultIndexOwn';
+        $auth->add($todoApiDefaultIndexOwn);
+        $auth->addChild($admin, $todoApiDefaultIndexOwn);
+
+
     }
 
     public function down()
@@ -66,6 +106,12 @@ class m211115_010207_todo_rule_rbac extends Migration
         $auth->remove($auth->getPermission('todoOwnWebDefaultCreate'));
         $auth->remove($auth->getPermission('todoOwnWebDefaultUpdate'));
         $auth->remove($auth->getPermission('todoOwnWebDefaultDelete'));
+
+        $auth->remove($auth->getPermission('todoOwnApiDefaultIndex'));
+        $auth->remove($auth->getPermission('todoOwnApiDefaultView'));
+        $auth->remove($auth->getPermission('todoOwnApiDefaultCreate'));
+        $auth->remove($auth->getPermission('todoOwnApiDefaultUpdate'));
+        $auth->remove($auth->getPermission('todoOwnApiDefaultDelete'));
     }
 
 }
