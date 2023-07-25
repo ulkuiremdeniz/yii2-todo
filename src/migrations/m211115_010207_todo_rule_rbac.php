@@ -15,84 +15,86 @@ class m211115_010207_todo_rule_rbac extends Migration
         $auth->add($rule);
         $role = \Yii::$app->setting->getValue('site::admin_role');
         $admin = (isset($role) && $role != '') ? $auth->getRole($role) : $auth->getRole('admin');
+       // $user = (isset($role) && $role != '') ? $auth->getRole($role) : $auth->getRole('user');
 
-        $todoWebDefaultIndexOwn = $auth->createPermission('todoWebDefaultIndexOwn');
-        $todoWebDefaultIndexOwn->description = 'Todo Web DefaultIndexOwn';
-        $todoWebDefaultIndexOwn->ruleName = $rule->name;
-        $auth->add($todoWebDefaultIndexOwn);
-        $auth->addChild($admin, $todoWebDefaultIndexOwn);
-        $todoWebDefaultIndex = $auth->getPermission('todoWebDefaultIndex');
-        $auth->addChild($todoWebDefaultIndexOwn, $todoWebDefaultIndex);
+        $todoWebTaskIndexOwn = $auth->createPermission('todoWebTaskIndexOwn');
+        $todoWebTaskIndexOwn->description = 'Todo Web TaskIndexOwn';
+        $todoWebTaskIndexOwn->ruleName = $rule->name;
+        $auth->add($todoWebTaskIndexOwn);
+        $auth->addChild($admin, $todoWebTaskIndexOwn);
+        $todoWebTaskIndex = $auth->getPermission('todoWebTaskIndex');
+        $auth->addChild($todoWebTaskIndexOwn, $todoWebTaskIndex);
+      //  $auth->addChild($user, $todoWebTaskIndexOwn);
 
-        $todoWebDefaultViewOwn = $auth->createPermission('todoWebDefaultViewOwn');
-        $todoWebDefaultViewOwn->description = 'Todo Web DefaultViewOwn';
-        $todoWebDefaultViewOwn->ruleName = $rule->name;
-        $auth->add($todoWebDefaultViewOwn);
-        $auth->addChild($admin, $todoWebDefaultViewOwn);
-        $todoWebDefaultView = $auth->getPermission('todoWebDefaultView');
-        $auth->addChild($todoWebDefaultViewOwn, $todoWebDefaultView);
+        $todoWebTaskViewOwn = $auth->createPermission('todoWebTaskViewOwn');
+        $todoWebTaskViewOwn->description = 'Todo Web TaskViewOwn';
+        $todoWebTaskViewOwn->ruleName = $rule->name;
+        $auth->add($todoWebTaskViewOwn);
+        $auth->addChild($admin, $todoWebTaskViewOwn);
+        $todoWebTaskView = $auth->getPermission('todoWebTaskView');
+        $auth->addChild($todoWebTaskViewOwn, $todoWebTaskView);
 
-        $todoWebDefaultCreateOwn = $auth->createPermission('todoWebDefaultCreateOwn');
-        $todoWebDefaultCreateOwn->description = 'Todo Web DefaultCreateOwn';
-        $todoWebDefaultCreateOwn->ruleName = $rule->name;
-        $auth->add($todoWebDefaultCreateOwn);
-        $auth->addChild($admin, $todoWebDefaultCreateOwn);
-        $todoWebDefaultCreate = $auth->getPermission('todoWebDefaultCreate');
-        $auth->addChild($todoWebDefaultCreateOwn, $todoWebDefaultCreate);
+        $todoWebTaskCreateOwn = $auth->createPermission('todoWebTaskCreateOwn');
+        $todoWebTaskCreateOwn->description = 'Todo Web TaskCreateOwn';
+        $todoWebTaskCreateOwn->ruleName = $rule->name;
+        $auth->add($todoWebTaskCreateOwn);
+        $auth->addChild($admin, $todoWebTaskCreateOwn);
+        $todoWebTaskCreate = $auth->getPermission('todoWebTaskCreate');
+        $auth->addChild($todoWebTaskCreateOwn, $todoWebTaskCreate);
 
-        $todoWebDefaultUpdateOwn = $auth->createPermission('todoWebDefaultUpdateOwn');
-        $todoWebDefaultUpdateOwn->description = 'Todo Web DefaultUpdateOwn';
-        $todoWebDefaultUpdateOwn->ruleName = $rule->name;
-        $auth->add($todoWebDefaultUpdateOwn);
-        $auth->addChild($admin, $todoWebDefaultUpdateOwn);
-        $todoWebDefaultUpdate = $auth->getPermission('todoWebDefaultUpdate');
-        $auth->addChild($todoWebDefaultUpdateOwn, $todoWebDefaultUpdate);
+        $todoWebTaskUpdateOwn = $auth->createPermission('todoWebTaskUpdateOwn');
+        $todoWebTaskUpdateOwn->description = 'Todo Web TaskUpdateOwn';
+        $todoWebTaskUpdateOwn->ruleName = $rule->name;
+        $auth->add($todoWebTaskUpdateOwn);
+        $auth->addChild($admin, $todoWebTaskUpdateOwn);
+        $todoWebTaskUpdate = $auth->getPermission('todoWebTaskUpdate');
+        $auth->addChild($todoWebTaskUpdateOwn, $todoWebTaskUpdate);
 
-        $todoWebDefaultDeleteOwn = $auth->createPermission('todoWebDefaultDeleteOwn');
-        $todoWebDefaultDeleteOwn->description = 'Todo Web DefaultDeleteOwn';
-        $todoWebDefaultDeleteOwn->ruleName = $rule->name;
-        $auth->add($todoWebDefaultDeleteOwn);
-        $auth->addChild($admin, $todoWebDefaultDeleteOwn);
-        $todoWebDefaultDelete = $auth->getPermission('todoWebDefaultDelete');
-        $auth->addChild($todoWebDefaultDeleteOwn, $todoWebDefaultDelete);
+        $todoWebTaskDeleteOwn = $auth->createPermission('todoWebTaskDeleteOwn');
+        $todoWebTaskDeleteOwn->description = 'Todo Web TaskDeleteOwn';
+        $todoWebTaskDeleteOwn->ruleName = $rule->name;
+        $auth->add($todoWebTaskDeleteOwn);
+        $auth->addChild($admin, $todoWebTaskDeleteOwn);
+        $todoWebTaskDelete = $auth->getPermission('todoWebTaskDelete');
+        $auth->addChild($todoWebTaskDeleteOwn, $todoWebTaskDelete);
 
-        $todoApiDefaultViewOwn = $auth->createPermission('todoApiDefaultViewOwn');
-        $todoApiDefaultViewOwn->description = 'Todo Api DefaultViewOwn';
-        $todoApiDefaultViewOwn->ruleName = $rule->name;
-        $auth->add($todoApiDefaultViewOwn);
-        $auth->addChild($admin, $todoApiDefaultViewOwn);
-        $todoApiDefaultView = $auth->getPermission('todoApiDefaultView');
-        $auth->addChild($todoApiDefaultViewOwn, $todoApiDefaultView);
+        $todoApiTaskViewOwn = $auth->createPermission('todoApiTaskViewOwn');
+        $todoApiTaskViewOwn->description = 'Todo Api TaskViewOwn';
+        $todoApiTaskViewOwn->ruleName = $rule->name;
+        $auth->add($todoApiTaskViewOwn);
+        $auth->addChild($admin, $todoApiTaskViewOwn);
+        $todoApiTaskView = $auth->getPermission('todoApiTaskView');
+        $auth->addChild($todoApiTaskViewOwn, $todoApiTaskView);
 
-        $todoApiDefaultCreateOwn = $auth->createPermission('todoApiDefaultCreateOwn');
-        $todoApiDefaultCreateOwn->description = 'Todo Api DefaultCreateOwn';
-        $todoApiDefaultCreateOwn->ruleName = $rule->name;
-        $auth->add($todoApiDefaultCreateOwn);
-        $auth->addChild($admin, $todoApiDefaultCreateOwn);
-        $todoApiDefaultCreate = $auth->getPermission('todoApiDefaultCreate');
-        $auth->addChild($todoApiDefaultCreateOwn, $todoApiDefaultCreate);
+        $todoApiTaskCreateOwn = $auth->createPermission('todoApiTaskCreateOwn');
+        $todoApiTaskCreateOwn->description = 'Todo Api TaskCreateOwn';
+        $todoApiTaskCreateOwn->ruleName = $rule->name;
+        $auth->add($todoApiTaskCreateOwn);
+        $auth->addChild($admin, $todoApiTaskCreateOwn);
+        $todoApiTaskCreate = $auth->getPermission('todoApiTaskCreate');
+        $auth->addChild($todoApiTaskCreateOwn, $todoApiTaskCreate);
 
-        $todoApiDefaultUpdateOwn = $auth->createPermission('todoApiDefaultUpdateOwn');
-        $todoApiDefaultUpdateOwn->description = 'Todo Api DefaultUpdateOwn';
-        $todoApiDefaultUpdateOwn->ruleName = $rule->name;
-        $auth->add($todoApiDefaultUpdateOwn);
-        $auth->addChild($admin, $todoApiDefaultUpdateOwn);
-        $todoApiDefaultUpdate = $auth->getPermission('todoApiDefaultUpdate');
-        $auth->addChild($todoApiDefaultUpdateOwn, $todoApiDefaultUpdate);
+        $todoApiTaskUpdateOwn = $auth->createPermission('todoApiTaskUpdateOwn');
+        $todoApiTaskUpdateOwn->description = 'Todo Api TaskUpdateOwn';
+        $todoApiTaskUpdateOwn->ruleName = $rule->name;
+        $auth->add($todoApiTaskUpdateOwn);
+        $auth->addChild($admin, $todoApiTaskUpdateOwn);
+        $todoApiTaskUpdate = $auth->getPermission('todoApiTaskUpdate');
+        $auth->addChild($todoApiTaskUpdateOwn, $todoApiTaskUpdate);
 
-        $todoApiDefaultDeleteOwn = $auth->createPermission('todoApiDefaultDeleteOwn');
-        $todoApiDefaultDeleteOwn->description = 'Todo Api DefaultDeleteOwn';
-        $todoApiDefaultDeleteOwn->ruleName = $rule->name;
-        $auth->add($todoApiDefaultDeleteOwn);
-        $auth->addChild($admin, $todoApiDefaultDeleteOwn);
-        $todoApiDefaultDelete = $auth->getPermission('todoApiDefaultDelete');
-        $auth->addChild($todoApiDefaultDeleteOwn, $todoApiDefaultDelete);
+        $todoApiTaskDeleteOwn = $auth->createPermission('todoApiTaskDeleteOwn');
+        $todoApiTaskDeleteOwn->description = 'Todo Api TaskDeleteOwn';
+        $todoApiTaskDeleteOwn->ruleName = $rule->name;
+        $auth->add($todoApiTaskDeleteOwn);
+        $auth->addChild($admin, $todoApiTaskDeleteOwn);
+        $todoApiTaskDelete = $auth->getPermission('todoApiTaskDelete');
+        $auth->addChild($todoApiTaskDeleteOwn, $todoApiTaskDelete);
 
 
-        $todoApiDefaultIndexOwn = $auth->createPermission('todoApiDefaultIndexOwn');
-        $todoApiDefaultIndexOwn->description = 'Todo Api DefaultIndexOwn';
-        $auth->add($todoApiDefaultIndexOwn);
-        $auth->addChild($admin, $todoApiDefaultIndexOwn);
+        $todoApiTaskIndexOwn = $auth->createPermission('todoApiTaskIndexOwn');
+        $todoApiTaskIndexOwn->description = 'Todo Api TaskIndexOwn';
+        $auth->add($todoApiTaskIndexOwn);
+        $auth->addChild($admin, $todoApiTaskIndexOwn);
 
 
     }
@@ -101,17 +103,17 @@ class m211115_010207_todo_rule_rbac extends Migration
     {
         $auth = \Yii::$app->authManager;
 
-        $auth->remove($auth->getPermission('todoOwnWebDefaultIndex'));
-        $auth->remove($auth->getPermission('todoOwnWebDefaultView'));
-        $auth->remove($auth->getPermission('todoOwnWebDefaultCreate'));
-        $auth->remove($auth->getPermission('todoOwnWebDefaultUpdate'));
-        $auth->remove($auth->getPermission('todoOwnWebDefaultDelete'));
+        $auth->remove($auth->getPermission('todoOwnWebTaskIndex'));
+        $auth->remove($auth->getPermission('todoOwnWebTaskView'));
+        $auth->remove($auth->getPermission('todoOwnWebTaskCreate'));
+        $auth->remove($auth->getPermission('todoOwnWebTaskUpdate'));
+        $auth->remove($auth->getPermission('todoOwnWebTaskDelete'));
 
-        $auth->remove($auth->getPermission('todoOwnApiDefaultIndex'));
-        $auth->remove($auth->getPermission('todoOwnApiDefaultView'));
-        $auth->remove($auth->getPermission('todoOwnApiDefaultCreate'));
-        $auth->remove($auth->getPermission('todoOwnApiDefaultUpdate'));
-        $auth->remove($auth->getPermission('todoOwnApiDefaultDelete'));
+        $auth->remove($auth->getPermission('todoOwnApiTaskIndex'));
+        $auth->remove($auth->getPermission('todoOwnApiTaskView'));
+        $auth->remove($auth->getPermission('todoOwnApiTaskCreate'));
+        $auth->remove($auth->getPermission('todoOwnApiTaskUpdate'));
+        $auth->remove($auth->getPermission('todoOwnApiTaskDelete'));
     }
 
 }

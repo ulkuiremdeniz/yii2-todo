@@ -5,6 +5,9 @@ namespace ulkuiremdeniz\todo\models;
 use Yii;
 use portalium\user\models\User;
 use portalium\workspace\models\Workspace;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\AttributeBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "{{%todo_task}}".
@@ -21,7 +24,7 @@ use portalium\workspace\models\Workspace;
  * @property UserUser $user
  * @property WorkspaceWorkspace $workspace
  */
-class Task extends \yii\db\ActiveRecord
+class Task extends ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -38,7 +41,7 @@ class Task extends \yii\db\ActiveRecord
     {
         return [
             [['status', 'id_user', 'id_workspace'], 'integer'],
-            [['id_user', 'id_workspace'], 'required'],
+          //  [['id_user', 'id_workspace'], 'required'],
             [['date_create', 'date_update'], 'safe'],
             [['title', 'description'], 'string', 'max' => 255],
             [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['id_user' => 'id_user']],
@@ -82,4 +85,60 @@ class Task extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Workspace::class, ['id_workspace' => 'id_workspace']);
     }
+
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => BlameableBehavior::class,
+                'createdByAttribute' => 'id_user',
+                'updatedByAttribute' => 'id_user',
+            ],
+
+            [
+                'class' => AttributeBehavior::class,
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'id_workspace',
+                    ActiveRecord::EVENT_BEFORE_UPDATE => 'id_workspace',
+                    ],
+                'value' => function ($event) {
+                    return Yii::$app->workspace->id;
+                },
+            ]
+
+        ];
+    }
+
+
+
+
+  /*  public static function find()
+    {
+        $activeWorkspaceId = Yii::$app->workspace->id;
+        $query = parent::find();
+        if (Yii::$app->user->can('todoTaskFindAll', ['id_module' => 'todo'])) {
+            return $query;
+        }
+        if (!Yii::$app->user->can('todoTaskFindOwner', ['id_module' => 'todo'])) {
+            return $query->andWhere('0=1');
+        }
+        if ($activeWorkspaceId) {
+            $query->andWhere([Module::$tablePrefix . 'todo.id_workspace' => $activeWorkspaceId]);
+        }else{
+            return $query->andWhere('0=1');
+        }
+        return $query;
+    }
+
+    public function beforeSave($insert)
+    {
+        if (Yii::$app->workspace->checkOwner($this->id_workspace)) {
+            return parent::beforeSave($insert);
+        }
+        return false;
+    }
+
+*/
+
 }

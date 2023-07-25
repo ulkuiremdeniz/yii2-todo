@@ -11,7 +11,7 @@ use portalium\rest\ActiveController as RestActiveController;
 
 class TaskController extends RestActiveController
 {
-    //task db indeki verileri yönetmemizi sağlar
+    //task tablosundaki verileri yönetmemizi sağlar
     public $modelClass = 'ulkuiremdeniz\todo\models\Task';
 
     //üst sınıfı ezerek burada kurallar tanımlıyoruz
@@ -25,14 +25,16 @@ class TaskController extends RestActiveController
             'searchModel' => TaskSearch::class,
             'attributeMap' => [
                 'title' => 'title',
+               //filtreli arama işlemini title üzerinde yapacak
             ],
         ];
 
+        //prepareDataProvider  filtreli ve kullanıcıya göre sınırlanmış verileri döndürür
         $actions['index']['prepareDataProvider'] = function ($action) {
             $searchModel = new TaskSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-            //eğer ındex yetkisi yoksa sadece giriş yapmışkullanıcının verilerini getirir
-            if (!Yii::$app->user->can('todoApiDefaultIndex')) {
+            //eğer ındex yetkisi yoksa sadece giriş yapmış kullanıcının verilerini getirir
+            if (!Yii::$app->user->can('todoApiTaskIndex')) {
                 $dataProvider->query->andWhere(['id_user' => Yii::$app->user->id]);
             }
             return $dataProvider;
@@ -40,7 +42,7 @@ class TaskController extends RestActiveController
         return $actions;
     }
 
-    //özel yetkilendirme kontrolleri
+    //CRUD işlemleri öncesi özel yetkilendirme kontrollerini gerçekleştirir bu işlemlere yetkin var mı?
     public function beforeAction($action)
     {
         if (!parent::beforeAction($action)) {
@@ -49,23 +51,23 @@ class TaskController extends RestActiveController
         switch ($action->id) {
             //yetkilere sahip misin onu kontrol ediyor
             case 'view':
-                if (!Yii::$app->user->can('todoApiDefaultTaskView'))
+                if (!Yii::$app->user->can('todoApiTaskView'))
                     throw new \yii\web\ForbiddenHttpException(Module::t('You do not have permission to view this content.'));
                 break;
             case 'create':
-                if (!Yii::$app->user->can('todoApiDefaultTaskCreate'))
+                if (!Yii::$app->user->can('todoApiTaskCreate'))
                     throw new \yii\web\ForbiddenHttpException(Module::t('You do not have permission to create this content.'));
                 break;
             case 'update':
-                if (!Yii::$app->user->can('todoApiDefaultTaskUpdate'))
+                if (!Yii::$app->user->can('todoApiTaskUpdate'))
                     throw new \yii\web\ForbiddenHttpException(Module::t('You do not have permission to update this content.'));
                 break;
             case 'delete':
-                if (!Yii::$app->user->can('todoApiDefaultTaskDelete'))
+                if (!Yii::$app->user->can('todoApiTaskDelete'))
                     throw new \yii\web\ForbiddenHttpException(Module::t('You do not have permission to delete this content.'));
                 break;
             case 'index':
-                if (!Yii::$app->user->can('todoApiDefaultTaskIndex') && !Yii::$app->user->can('todoApiCategoryIndexOwn'))
+                if (!Yii::$app->user->can('todoApiTaskIndex') )
                     throw new \yii\web\ForbiddenHttpException(Module::t('You do not have permission to view this content.'));
                 break;
         }
@@ -73,13 +75,4 @@ class TaskController extends RestActiveController
         return true;
     }
 
-    public function actionIndex($id = null)
-    {
-        if ($id == null) {
-            $data = Task::find()->all();
-        } else {
-            $data = Task::find()->where(['id_task' => $id])->all();
-        }
-        return $data;
-    }
 }

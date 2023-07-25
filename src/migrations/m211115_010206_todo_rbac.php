@@ -12,58 +12,56 @@ class m211115_010206_todo_rbac extends Migration
         $role = \Yii::$app->setting->getValue('site::admin_role');
         $admin = (isset($role) && $role != '') ? $auth->getRole($role) : $auth->getRole('admin');
 
-        $todoWebDefaultIndex = $auth->createPermission('todoWebDefaultIndex');
-        $todoWebDefaultIndex->description = 'Todo Web DefaultIndex';
-        $auth->add($todoWebDefaultIndex);
-        $auth->addChild($admin, $todoWebDefaultIndex);
+        $todoWebTaskIndex = $auth->createPermission('todoWebTaskIndex');
+        $todoWebTaskIndex->description = 'Todo Web TaskIndex';
+        $auth->add($todoWebTaskIndex);
+        $auth->addChild($admin, $todoWebTaskIndex);
 
-        $todoWebDefaultView = $auth->createPermission('todoWebDefaultView');
-        $todoWebDefaultView->description = 'Todo Web DefaultView';
-        $auth->add($todoWebDefaultView);
-        $auth->addChild($admin, $todoWebDefaultView);
+        $todoWebTaskView = $auth->createPermission('todoWebTaskView');
+        $todoWebTaskView->description = 'Todo Web TaskView';
+        $auth->add($todoWebTaskView);
+        $auth->addChild($admin, $todoWebTaskView);
 
-        $todoWebDefaultCreate = $auth->createPermission('todoWebDefaultCreate');
-        $todoWebDefaultCreate->description = 'Todo Web DefaultCreate';
-        $auth->add($todoWebDefaultCreate);
-        $auth->addChild($admin, $todoWebDefaultCreate);
+        $todoWebTaskCreate = $auth->createPermission('todoWebTaskCreate');
+        $todoWebTaskCreate->description = 'Todo Web TaskCreate';
+        $auth->add($todoWebTaskCreate);
+        $auth->addChild($admin, $todoWebTaskCreate);
 
-        $todoWebDefaultUpdate = $auth->createPermission('todoWebDefaultUpdate');
-        $todoWebDefaultUpdate->description = 'Todo Web DefaultUpdate';
-        $auth->add($todoWebDefaultUpdate);
-        $auth->addChild($admin, $todoWebDefaultUpdate);
+        $todoWebTaskUpdate = $auth->createPermission('todoWebTaskUpdate');
+        $todoWebTaskUpdate->description = 'Todo Web TaskUpdate';
+        $auth->add($todoWebTaskUpdate);
+        $auth->addChild($admin, $todoWebTaskUpdate);
 
-        $todoWebDefaultDelete = $auth->createPermission('todoWebDefaultDelete');
-        $todoWebDefaultDelete->description = 'Todo Web DefaultDelete';
-        $auth->add($todoWebDefaultDelete);
-        $auth->addChild($admin, $todoWebDefaultDelete);
-
-
-        $todoApiDefaultIndex = $auth->createPermission('todoApiDefaultIndex');
-        $todoApiDefaultIndex->description = 'Todo Api Default Index';
-        $auth->add($todoApiDefaultIndex);
-        $auth->addChild($admin, $todoApiDefaultIndex);
-
-        $todoApiDefaultView = $auth->createPermission('todoApiDefaultView');
-        $todoApiDefaultView->description = 'Todo Api Default View';
-        $auth->add($todoApiDefaultView);
-        $auth->addChild($admin, $todoApiDefaultView);
-
-        $todoApiDefaultCreate = $auth->createPermission('todoApiDefaultCreate');
-        $todoApiDefaultCreate->description = 'Todo Api Default Create';
-        $auth->add($todoApiDefaultCreate);
-        $auth->addChild($admin, $todoApiDefaultCreate);
-
-        $todoApiDefaultUpdate = $auth->createPermission('todoApiDefaultUpdate');
-        $todoApiDefaultUpdate->description = 'Todo Api Default Update';
-        $auth->add($todoApiDefaultUpdate);
-        $auth->addChild($admin, $todoApiDefaultUpdate);
-
-        $todoApiDefaultDelete = $auth->createPermission('todoApiDefaultDelete');
-        $todoApiDefaultDelete->description = 'Todo Api Default Delete';
-        $auth->add($todoApiDefaultDelete);
-        $auth->addChild($admin, $todoApiDefaultDelete);
+        $todoWebTaskDelete = $auth->createPermission('todoWebTaskDelete');
+        $todoWebTaskDelete->description = 'Todo Web TaskDelete';
+        $auth->add($todoWebTaskDelete);
+        $auth->addChild($admin, $todoWebTaskDelete);
 
 
+        $todoApiTaskIndex = $auth->createPermission('todoApiTaskIndex');
+        $todoApiTaskIndex->description = 'Todo Api Task Index';
+        $auth->add($todoApiTaskIndex);
+        $auth->addChild($admin, $todoApiTaskIndex);
+
+        $todoApiTaskView = $auth->createPermission('todoApiTaskView');
+        $todoApiTaskView->description = 'Todo Api Task View';
+        $auth->add($todoApiTaskView);
+        $auth->addChild($admin, $todoApiTaskView);
+
+        $todoApiTaskCreate = $auth->createPermission('todoApiTaskCreate');
+        $todoApiTaskCreate->description = 'Todo Api Task Create';
+        $auth->add($todoApiTaskCreate);
+        $auth->addChild($admin, $todoApiTaskCreate);
+
+        $todoApiTaskUpdate = $auth->createPermission('todoApiTaskUpdate');
+        $todoApiTaskUpdate->description = 'Todo Api Task Update';
+        $auth->add($todoApiTaskUpdate);
+        $auth->addChild($admin, $todoApiTaskUpdate);
+
+        $todoApiTaskDelete = $auth->createPermission('todoApiTaskDelete');
+        $todoApiTaskDelete->description = 'Todo Api Task Delete';
+        $auth->add($todoApiTaskDelete);
+        $auth->addChild($admin, $todoApiTaskDelete);
 
 
 
@@ -72,17 +70,17 @@ class m211115_010206_todo_rbac extends Migration
 
     public function down()
     {
-        $auth->remove($auth->getPermission('todoWebDefaultIndex'));
-        $auth->remove($auth->getPermission('todoWebDefaultView'));
-        $auth->remove($auth->getPermission('todoWebDefaultCreate'));
-        $auth->remove($auth->getPermission('todoWebDefaultUpdate'));
-        $auth->remove($auth->getPermission('todoWebDefaultDelete'));
+        $auth->remove($auth->getPermission('todoWebTaskIndex'));
+        $auth->remove($auth->getPermission('todoWebTaskView'));
+        $auth->remove($auth->getPermission('todoWebTaskCreate'));
+        $auth->remove($auth->getPermission('todoWebTaskUpdate'));
+        $auth->remove($auth->getPermission('todoWebTaskDelete'));
 
-        $auth->remove($auth->getPermission('todoApiDefaultIndex'));
-        $auth->remove($auth->getPermission('todoApiDefaultView'));
-        $auth->remove($auth->getPermission('todoApiDefaultCreate'));
-        $auth->remove($auth->getPermission('todoApiDefaultUpdate'));
-        $auth->remove($auth->getPermission('todoApiDefaultDelete'));
+        $auth->remove($auth->getPermission('todoApiTaskIndex'));
+        $auth->remove($auth->getPermission('todoApiTaskView'));
+        $auth->remove($auth->getPermission('todoApiTaskCreate'));
+        $auth->remove($auth->getPermission('todoApiTaskUpdate'));
+        $auth->remove($auth->getPermission('todoApiTaskDelete'));
     }
 
 

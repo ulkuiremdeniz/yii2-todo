@@ -1,16 +1,16 @@
 <?php
 
-namespace meryemertrk\todo\controllers\web;
+namespace ulkuiremdeniz\todo\controllers\web;
 
-use meryemertrk\todo\models\Task;
-use meryemertrk\todo\models\TaskSearch;
+use ulkuiremdeniz\todo\models\Task;
+use ulkuiremdeniz\todo\models\TaskSearch;
 use portalium\user\models\User;
 use portalium\web\Controller as WebController;
 use Yii;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use meryemertrk\todo\Module;
+use ulkuiremdeniz\todo\Module;
 
 /**
  * TaskController implements the CRUD actions for Task model.
@@ -67,7 +67,7 @@ class TaskController extends WebController
      */
     public function actionView($id)
     {
-        if (!\Yii::$app->user->can('todoWebTaskView') && !\Yii::$app->user->can('todoWebTaskViewOwn')) {
+        if (!\Yii::$app->user->can('todoWebTaskView')) {
             throw new \yii\web\ForbiddenHttpException(Module::t('Sorry you are not allowed to view Task'));
         }
 

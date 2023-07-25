@@ -18,7 +18,10 @@ class Module extends \portalium\base\Module
             'class' => 'yii\rest\UrlRule',
             'controller' => [
                 'todo/default',
-            ]
+                'todo/task',
+
+            ],
+          'pluralize'=>false
         ],
     ];
     
@@ -33,10 +36,6 @@ class Module extends \portalium\base\Module
     {
         return parent::coreT('todo', $message, $params);
     }
-
-
-
-
 
 
 

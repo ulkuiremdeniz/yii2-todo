@@ -9,7 +9,7 @@ $this->title = Module::t('Create Task');
 $this->params['breadcrumbs'][] = ['label' => Module::t('Task'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="content-create">
+<div class="task-create">
 
     <?= $this->render('_form', [
         'model' => $model,
