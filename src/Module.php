@@ -37,7 +37,19 @@ class Module extends \portalium\base\Module
         return parent::coreT('todo', $message, $params);
     }
 
-
+    public function getMenuItems(){
+        $menuItems = [
+            [
+                [
+                    'menu' => 'web',
+                    'type' => 'widget',
+                    'label' => 'ulkuiremdeniz\todo\widgets\task',
+                    'name' => 'task',
+                ]
+            ],
+        ];
+        return $menuItems;
+    }
 
 
     /* 
