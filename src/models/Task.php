@@ -2,12 +2,14 @@
 
 namespace ulkuiremdeniz\todo\models;
 
+use ulkuiremdeniz\todo\Module;
 use Yii;
 use portalium\user\models\User;
 use portalium\workspace\models\Workspace;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\AttributeBehavior;
 use yii\db\ActiveRecord;
+use yii\db\Query;
 
 /**
  * This is the model class for table "{{%todo_task}}".
@@ -87,10 +89,13 @@ class Task extends ActiveRecord
     }
 
 
+    //ActiveRecord sınıfı için özel işlevleri gerçekleştirmek amacıyla oluşturuldu
+    //ActiveRecord oluşturulması veya güncellenmesi durumunda belirtilen davranışların otomatik olmasını sağlar
     public function behaviors()
     {
         return [
             [
+                //kim tarafından yapıldı
                 'class' => BlameableBehavior::class,
                 'createdByAttribute' => 'id_user',
                 'updatedByAttribute' => 'id_user',
@@ -99,6 +104,7 @@ class Task extends ActiveRecord
             [
                 'class' => AttributeBehavior::class,
                 'attributes' => [
+                    // bir kayıt oluşturulmadan veya güncellenmeden önce  id-workspace'e değer atamak için kullanılır
                     ActiveRecord::EVENT_BEFORE_INSERT => 'id_workspace',
                     ActiveRecord::EVENT_BEFORE_UPDATE => 'id_workspace',
                     ],
@@ -108,6 +114,23 @@ class Task extends ActiveRecord
             ]
 
         ];
+    }
+
+    public static function widgets()
+    {
+
+       //tümünü görüntüleme yetkisi varsa
+        if(Yii::$app->user->can('todoWebTaskIndex'))
+        {
+            return Task::find()->all();
+        }
+
+        //sadece kendini görüntüleme yetkisi varsa
+        if (Yii::$app->user->can('todoWebTaskIndexOwn')) {
+
+            return Task::findOne()->andWhere(['id_user'=>\Yii::$app->user->id]);
+        }
+
     }
 
 
