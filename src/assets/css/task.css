@@ -1,6 +1,4 @@
 
-/* task bildirim kısmının ön yüz kısmı oluşturuluyor*/
-
 /* zil ile ilgili ayarlamalar yapılıyor*/
 .dropdown {
     display:inline-block;
@@ -10,15 +8,9 @@
     padding:1px;
 }
 
-/* zil ikonuna karşılık geliyor*/
-.bi-bell {
-
-    font-size:1.5rem;
-}
-
 /* dropdown menüyü görselleştirmek için kullanılıyor*/
 .task {
-    min-width:120px;
+    min-width:5px;
 }
 
 /* bildirim içeriklerini görselleştirmek için kullanılıyor*/
@@ -39,11 +31,14 @@
     margin-left:10px;
 }
 
-
 .task-heading, .task-footer  {
-    padding:2px 10px;
+    padding:2px  10px;
 }
 
+.dropdown-menu {
+    max-height: 200px; /* Dropdown maksimum yüksekliğini belirleyin, isteğe bağlı */
+    overflow-y: auto; /* Düşüş menüsü içinde kaydırma çubuğunu etkinleştirin, isteğe bağlı */
+}
 
 .dropdown-menu.divider {
     margin:5px 0;
@@ -51,7 +46,7 @@
 /* içeriğin rengini değiştiriyor*/
 .item-title {
 
-    font-size:1.3rem;
+    font-size:1.3 rem;
     color: #000000;
 
 }
@@ -65,7 +60,7 @@
 .task a.content {
     text-decoration:none;
     background:#fdf7f7;
-
+    padding:1px;
 }
 /* bildirimlerin genel görünümünü ayarlar*/
 .task-item {
